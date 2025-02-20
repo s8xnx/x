@@ -1,0 +1,1 @@
+:root{--cursor-url:auto;--font-family:"Inter",sans-serif}*{scrollbar-width:none;cursor:var(--cursor-url),auto!important;font-family:var(--font-family)}* ::-moz-selection{background-color:var(--theme-color)!important}* ::selection{background-color:var(--theme-color)!important}
