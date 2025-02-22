@@ -3,7 +3,7 @@ body {
   font-family: 'Georgia', serif;
   text-align: center;
   background: radial-gradient(circle, #121212, #000000);
-  color: white; /* Changed to white for better visibility */
+  color: white;
   margin: 0;
   padding: 0;
   display: flex;
@@ -11,6 +11,47 @@ body {
   align-items: center;
   height: 100vh;
   overflow: hidden;
+}
+
+/* Overlay Styles */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+  backdrop-filter: blur(10px); /* Blur effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's on top */
+  cursor: pointer; /* Indicates it's clickable */
+  transition: opacity 0.5s ease; /* Smooth fade-out */
+}
+
+#overlay-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  font-family: 'Georgia', serif;
+  text-align: center;
+  animation: fade-in 1s ease-in-out;
+}
+
+/* Fade-in Animation for Overlay Text */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Blur Effect on Body When Overlay is Active */
+body.overlay-active {
+  overflow: hidden; /* Prevent scrolling */
 }
 
 /* Card Design with Neon Glow */
@@ -35,6 +76,16 @@ body {
     0 0 20px rgba(114, 102, 255, 0.6), /* Middle glow */
     0 0 30px rgba(114, 102, 255, 0.4); /* Outer glow */
   animation: neon-glow 2s infinite ease-in-out;
+  opacity: 0; /* Start invisible */
+  transform: translateY(100vh); /* Start from the bottom */
+  transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 1.2s ease;
+  will-change: transform, opacity; /* Optimize for animation */
+}
+
+/* Card Visible State */
+.card.card-visible {
+  opacity: 1; /* Fully visible */
+  transform: translateY(0); /* Move to the center */
 }
 
 /* Neon Glow Animation */
@@ -167,7 +218,7 @@ h1 {
   cursor: pointer;
 }
 
-/* Neon glow behind each icon */
+/* Neon glow behind each icon (Reduced by 50%) */
 .social-icons a::before {
   content: "";
   position: absolute;
@@ -178,7 +229,7 @@ h1 {
   background: white;
   transform: translate(-50%, -50%);
   filter: blur(8px);
-  opacity: 0.5;
+  opacity: 0.25; /* Reduced from 0.5 to 0.25 (50% reduction) */
   pointer-events: none;
   border-radius: 50%;
   z-index: -1;
