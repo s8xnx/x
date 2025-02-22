@@ -163,10 +163,10 @@ body.overlay-active {
 .profile-container::after {
   content: "";
   position: absolute;
-  top: -3px; /* Moves the frame slightly outward */
-  left: -3px;
-  width: calc(100% + 6px); /* Expands the frame slightly */
-  height: calc(100% + 6px);
+  top: -7.5px; /* Moves the frame slightly outward */
+  left: -7.5px;
+  width: calc(100% + 15px); /* Expands the frame slightly */
+  height: calc(100% + 15px);
   background: url('https://6x9.fun/angry.png') center/100% 100% no-repeat;
   pointer-events: none;
 }
