@@ -49,31 +49,7 @@
     <div class="corner bottom-right">A♠</div>
   </div>
 
-  <script>
-    // Disable right-click on social media images to prevent download
-    document.querySelectorAll('.social-icons img').forEach(img => {
-      img.addEventListener('contextmenu', event => event.preventDefault());
-    });
-
-    // Overlay functionality
-    document.addEventListener('DOMContentLoaded', () => {
-      const overlay = document.getElementById('overlay');
-      const body = document.body;
-
-      // Add overlay-active class to body
-      body.classList.add('overlay-active');
-
-      // Remove overlay on click
-      overlay.addEventListener('click', () => {
-        overlay.style.opacity = '0'; // Fade out overlay
-        body.classList.remove('overlay-active'); // Remove blur effect
-
-        // Remove overlay after fade-out animation
-        setTimeout(() => {
-          overlay.remove();
-        }, 500); // Match this duration with the CSS transition
-      });
-    });
-  </script>
+  <!-- JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>
