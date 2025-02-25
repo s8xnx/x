@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- Viewport settings to disable pinch zoom on mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ABBASI</title>
   <style>
@@ -27,7 +26,6 @@
       position: relative;
     }
     
-    /* Background video covers full viewport */
     video#bgVideo {
       position: fixed;
       top: 0;
@@ -40,14 +38,14 @@
       will-change: transform;
     }
     
-    /* Overlay that fades out on click */
     #overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px) brightness(1.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -57,7 +55,13 @@
       color: #000;
       cursor: pointer;
       opacity: 1;
-      transition: opacity 0.3s ease;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    
+    #overlay.overlay-hidden {
+      opacity: 0;
+      backdrop-filter: blur(30px) brightness(2);
       pointer-events: none;
     }
     
@@ -67,6 +71,10 @@
       border-radius: 50%;
       overflow: hidden;
       margin-bottom: 20px;
+      transform: translateY(50px);
+      opacity: 0;
+      filter: blur(15px);
+      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
     }
     
     .profile img {
@@ -76,30 +84,35 @@
     }
     
     h1 {
-      font-size: 3rem;
+      font-size: 2.4rem;
       color: #000;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       font-family: Arial, sans-serif;
+      transform: translateY(50px);
+      opacity: 0;
+      filter: blur(15px);
+      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.1s;
     }
     
     h1 span {
       background: url('https://6x9.fun/new/images/s_b.gif');
-      padding: 10px;
+      padding: 8px;
       background-repeat: repeat;
     }
     
-    /* Updated badges container: smaller vertical padding for a slimmer pill shape */
     .badges {
       background: rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(5px);
-      padding: 5px 15px;  /* Reduced vertical padding */
+      padding: 5px 15px;
       border-radius: 9999px;
       margin-bottom: 20px;
       display: flex;
       gap: 15px;
+      transform: translateY(50px);
+      opacity: 0;
+      filter: blur(15px);
+      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.2s;
     }
-    
-    /* No highlight styling for v.png now */
     
     .badges img {
       height: 20px;
@@ -112,6 +125,10 @@
       margin-bottom: 20px;
       min-height: 60px;
       font-family: monospace;
+      transform: translateY(50px);
+      opacity: 0;
+      filter: blur(15px);
+      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.3s;
     }
     
     .typewriter::after {
@@ -122,6 +139,10 @@
     .links {
       display: flex;
       gap: 20px;
+      transform: translateY(50px);
+      opacity: 0;
+      filter: blur(15px);
+      transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.4s;
     }
     
     .links a img {
@@ -133,7 +154,6 @@
       transform: scale(1.1);
     }
     
-    /* Snowflake styles */
     .snow {
       position: absolute;
       pointer-events: none;
@@ -147,10 +167,15 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
+
+    .visible {
+      transform: translateY(0) !important;
+      opacity: 1 !important;
+      filter: blur(0) !important;
+    }
   </style>
 </head>
 <body>
-  <!-- Overlay shown until page is loaded and clicked -->
   <div id="overlay">Click Me</div>
   
   <video autoplay muted loop id="bgVideo">
@@ -181,16 +206,40 @@
   </div>
 
   <script>
-    // Global variable for overriding drift direction on click
     let globalDrift = null;
     
-    // When the page is fully loaded, enable overlay click to fade it out.
     window.addEventListener('load', function() {
       const overlay = document.getElementById('overlay');
+      const elementsToAnimate = [
+        document.querySelector('.profile'),
+        document.querySelector('h1'),
+        document.querySelector('.badges'),
+        document.querySelector('.typewriter'),
+        document.querySelector('.links')
+      ];
+
       overlay.style.pointerEvents = 'auto';
       overlay.addEventListener('click', function() {
-        overlay.style.opacity = 0;
-        setTimeout(() => overlay.style.display = 'none', 300);
+        // Animate overlay
+        overlay.classList.add('overlay-hidden');
+        
+        // Hide overlay completely after animation
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 600);
+
+        // Animate content elements
+        elementsToAnimate.forEach((el, index) => {
+          setTimeout(() => {
+            el.classList.add('visible');
+          }, index * 100 + 300);
+        });
+
+        // Start audio
+        const audio = document.getElementById('audioPlayer');
+        if (audio.paused) {
+          audio.play().catch(() => {});
+        }
       });
     });
 
@@ -221,32 +270,23 @@
     }
     typeWriter();
 
-    // Continuous snowfall effect
-    // Spawn a new snowflake every 300ms
+    // Snow effect
     setInterval(spawnSnowflake, 300);
 
     function spawnSnowflake() {
       const snow = document.createElement('div');
       snow.className = 'snow';
-      // Start at a random horizontal position along the top
       const startX = Math.random() * window.innerWidth;
       const startY = -10;
       snow.style.left = startX + 'px';
       snow.style.top = startY + 'px';
-      
-      // Smaller snowflakes: size between 2-5px
       const size = Math.random() * 3 + 2;
       snow.style.width = size + 'px';
       snow.style.height = size + 'px';
-      
-      // Random horizontal drift (will be overridden if globalDrift is set)
       const drift = (Math.random() - 0.5) * 1;
       snow.dataset.drift = drift;
-      
-      // Increased falling speed: between 4 and 8 pixels per frame
       const fallSpeed = (Math.random() * 1 + 1) * 4;
       snow.dataset.fallSpeed = fallSpeed;
-      
       document.body.appendChild(snow);
       animateSnowflake(snow, startX, startY);
     }
@@ -254,20 +294,16 @@
     function animateSnowflake(snow, x, y) {
       let fadeScheduled = false;
       function animate() {
-        // Use global drift if set; otherwise, use the snowflake's own drift.
         const drift = globalDrift !== null ? globalDrift : parseFloat(snow.dataset.drift);
         const fallSpeed = parseFloat(snow.dataset.fallSpeed);
         x += drift;
         y += fallSpeed;
-        
-        // Clamp the snowflake at the bottom of the viewport.
         if (y >= window.innerHeight - snow.offsetHeight) {
           y = window.innerHeight - snow.offsetHeight;
           snow.style.left = x + 'px';
           snow.style.top = y + 'px';
           if (!fadeScheduled) {
             fadeScheduled = true;
-            // Wait 2 seconds at the bottom, then fade out over 0.5 seconds.
             setTimeout(() => {
               snow.style.opacity = 0;
               setTimeout(() => { snow.remove(); }, 500);
@@ -282,22 +318,12 @@
       requestAnimationFrame(animate);
     }
 
-    // Update snow drift direction on page click (only when overlay is hidden)
+    // Click interaction
     document.addEventListener('click', function(e) {
       const overlay = document.getElementById('overlay');
       if (overlay && overlay.style.display !== 'none') return;
-      // Set global drift based on click position:
-      // If clicked on the right half, drift right; otherwise, drift left.
       globalDrift = e.clientX > window.innerWidth / 2 ? 0.5 : -0.5;
     });
-
-    // Play audio on the first user click (if not already playing)
-    document.addEventListener('click', () => {
-      const audio = document.getElementById('audioPlayer');
-      if (audio.paused) {
-        audio.play().catch(() => {});
-      }
-    }, { once: true });
   </script>
 </body>
 </html>
