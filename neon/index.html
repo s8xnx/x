@@ -1,462 +1,455 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ABBASI</title>
-  <style>
-    /* ------------------------------
-       RESET & BASE
-    ------------------------------ */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      width: 100%;
-      height: 100%;
-    }
-    body {
-      background: url("http://6x9.fun/neon/b.gif") center center no-repeat fixed;
-      background-size: cover;
-      color: #ff00cc; /* Neon pink */
-      font-family: 'Courier New', Courier, monospace;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .container {
-      width: 95%;
-      max-width: 600px;
-      margin: 40px auto;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />  
+  <title>ABBASI</title>  
+  <style>  
+    /* ------------------------------  
+       RESET & BASE  
+    ------------------------------ */  
+    * {  
+      margin: 0;  
+      padding: 0;  
+      box-sizing: border-box;  
+    }  
+    html, body {  
+      width: 100%;  
+      height: 100%;  
+    }  
+    body {  
+      background: url("https://6x9.fun/neon/b.gif") center center no-repeat fixed;  
+      background-size: cover;  
+      color: #ff00cc; /* Neon pink */  
+      font-family: 'Courier New', Courier, monospace;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+    }  
+    .container {  
+      width: 95%;  
+      max-width: 600px;  
+      margin: 40px auto;  
+      display: flex;  
+      flex-direction: column;  
+      gap: 20px;  
+    }  /* ------------------------------  
+   PROFILE CARD (Increased Height)  
+------------------------------ */  
+.profile-card {  
+  background: rgba(255, 0, 204, 0.05);   
+  border: 1px solid rgba(255, 0, 204, 0.3);  
+  border-radius: 20px;  
+  padding: 30px 20px;  
+  min-height: 280px;  
+  box-shadow: 0 0 15px rgba(255, 0, 204, 0.2);  
+  backdrop-filter: blur(4px);  
+}  
+.profile-header {  
+  display: flex;  
+  align-items: center;  
+  gap: 15px;  
+  margin-bottom: 15px;  
+  justify-content: center;  
+  flex-wrap: wrap;  
+}  
+.profile-image-container {  
+  width: 100px;  
+  height: 100px;  
+  border-radius: 50%;  
+  overflow: hidden;  
+  position: relative;  
+  box-shadow: 0 0 10px rgba(255, 0, 204, 0.4);  
+  flex-shrink: 0;  
+}  
+.profile-image-container img {  
+  width: 100%;  
+  height: 100%;  
+  object-fit: cover;  
+  pointer-events: none;  
+}  
+.profile-overlay {  
+  position: absolute;  
+  top: 0;  
+  left: 0;  
+  width: 100%;  
+  height: 100%;  
+  pointer-events: none;  
+}  
+.profile-info {  
+  display: flex;  
+  flex-direction: column;  
+  gap: 8px;  
+  align-items: flex-start;  
+  justify-content: center;  
+}  
+.profile-name {  
+  font-size: 1.6rem;  
+  font-weight: bold;  
+  line-height: 1;  
+}  
+.badges {  
+  display: flex;  
+  align-items: center;  
+  gap: 6px;  
+  background: rgba(255, 0, 204, 0.1);  
+  border: 1px solid rgba(255, 0, 204, 0.3);  
+  border-radius: 50px;  
+  padding: 4px 8px;  
+  backdrop-filter: blur(6px);  
+}  
+.badges img {  
+  width: 25px;  
+  height: 25px;  
+  pointer-events: none;  
+}  
+/* Convert originally black images to neon pink */  
+.neon {  
+  filter: invert(26%) sepia(79%) saturate(7492%) hue-rotate(299deg) brightness(105%) contrast(103%);  
+}  
 
-    /* ------------------------------
-       PROFILE CARD (Increased Height)
-    ------------------------------ */
-    .profile-card {
-      background: rgba(255, 0, 204, 0.05); 
-      border: 1px solid rgba(255, 0, 204, 0.3);
-      border-radius: 20px;
-      padding: 30px 20px;
-      min-height: 280px;
-      box-shadow: 0 0 15px rgba(255, 0, 204, 0.2);
-      backdrop-filter: blur(4px);
-    }
-    .profile-header {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .profile-image-container {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      overflow: hidden;
-      position: relative;
-      box-shadow: 0 0 10px rgba(255, 0, 204, 0.4);
-      flex-shrink: 0;
-    }
-    .profile-image-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-    }
-    .profile-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      align-items: flex-start;
-      justify-content: center;
-    }
-    .profile-name {
-      font-size: 1.6rem;
-      font-weight: bold;
-      line-height: 1;
-    }
-    .badges {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 0, 204, 0.1);
-      border: 1px solid rgba(255, 0, 204, 0.3);
-      border-radius: 50px;
-      padding: 4px 8px;
-      backdrop-filter: blur(6px);
-    }
-    .badges img {
-      width: 25px;
-      height: 25px;
-      pointer-events: none;
-    }
-    /* Convert originally black images to neon pink */
-    .neon {
-      filter: invert(26%) sepia(79%) saturate(7492%) hue-rotate(299deg) brightness(105%) contrast(103%);
-    }
+/* Social Media Links in Profile */  
+.social-links {  
+  display: flex;  
+  justify-content: center;  
+  gap: 20px;  
+  margin-top: 15px;  
+}  
+.social-links a {  
+  text-decoration: none;  
+}  
+.social-icon {  
+  width: 50px;  
+  height: 50px;  
+  pointer-events: auto;  
+}  
 
-    /* Social Media Links in Profile */
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 15px;
-    }
-    .social-links a {
-      text-decoration: none;
-    }
-    .social-icon {
-      width: 50px;
-      height: 50px;
-      pointer-events: auto;
-    }
+/* TYPEWRITER TEXT */  
+.typewriter {  
+  font-size: 1rem;  
+  margin: 10px auto 0 auto;  
+  white-space: pre-wrap;  
+  min-height: 80px;  
+  text-align: center;  
+  position: relative;  
+}  
+.cursor {  
+  display: inline-block;  
+  width: 2px;  
+  background: #ff00cc;  
+  animation: blink 0.7s steps(1) infinite;  
+  vertical-align: bottom;  
+  margin-left: 2px;  
+}  
+@keyframes blink {  
+  50% { opacity: 0; }  
+}  
 
-    /* TYPEWRITER TEXT */
-    .typewriter {
-      font-size: 1rem;
-      margin: 10px auto 0 auto;
-      white-space: pre-wrap;
-      min-height: 80px;
-      text-align: center;
-      position: relative;
-    }
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      background: #ff00cc;
-      animation: blink 0.7s steps(1) infinite;
-      vertical-align: bottom;
-      margin-left: 2px;
-    }
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
+/* ------------------------------  
+   MUSIC PLAYER (Minimal, Reduced Height)  
+------------------------------ */  
+.music-card {  
+  background: rgba(255, 0, 204, 0.05);  
+  border: 1px solid rgba(255, 0, 204, 0.3);  
+  border-radius: 20px;  
+  padding: 15px 10px;  
+  min-height: 180px;  
+  box-shadow: 0 0 15px rgba(255, 0, 204, 0.2);  
+  backdrop-filter: blur(4px);  
+  display: flex;  
+  flex-direction: column;  
+  gap: 10px;  
+  align-items: center;  
+}  
+.song-info {  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  gap: 15px;  
+  flex-wrap: wrap;  
+}  
+.song-art {  
+  width: 70px;  
+  height: 70px;  
+  border-radius: 50%;  
+  overflow: hidden;  
+  box-shadow: 0 0 8px rgba(255, 0, 204, 0.4);  
+  flex-shrink: 0;  
+}  
+.song-art img {  
+  width: 100%;  
+  height: 100%;  
+  object-fit: cover;  
+  pointer-events: none;  
+}  
+.song-details {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: flex-start;  
+  min-width: 120px;  
+}  
+.song-title {  
+  font-size: 1.1rem;  
+  font-weight: bold;  
+  margin-bottom: 4px;  
+}  
+.song-duration {  
+  font-size: 0.85rem;  
+  color: #ffb3ec;  
+}  
+.progress-container {  
+  width: 100%;  
+  height: 6px;  
+  background: rgba(255, 0, 204, 0.2);  
+  border-radius: 4px;  
+  overflow: hidden;  
+  margin-top: -5px;  
+}  
+.progress-bar {  
+  width: 0%;  
+  height: 100%;  
+  background: #ff00cc;  
+}  
+.music-controls {  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  gap: 30px;  
+  margin-top: 5px;  
+}  
+.control-btn {  
+  background: none;  
+  border: none;  
+  cursor: pointer;  
+  width: 40px;  
+  height: 40px;  
+  position: relative;  
+  transition: transform 0.1s;  
+}  
+.control-btn:hover {  
+  transform: scale(1.1);  
+}  
+.control-btn::before {  
+  content: "";  
+  display: block;  
+  width: 100%;  
+  height: 100%;  
+  background: #ff00cc;  
+  mask-repeat: no-repeat;  
+  mask-position: center;  
+  mask-size: 50%;  
+  transition: background 0.2s;  
+}  
+.control-btn:active::before {  
+  background: #ff4ddb;  
+}  
+.btn-prev::before {  
+  mask-image: url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 320 512" xmlns="https://www.w3.org/2000/svg"><path d="M267.5 440.6c7.6 6.7 19.5 1.2 19.5-9.1V80.5c0-10.3-11.9-15.8-19.5-9.1L69.8 246.9c-5.3 4.7-5.3 13.4 0 18.1l197.7 176z"/></svg>');  
+}  
+.btn-play::before {  
+  mask-image: url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 384 512" xmlns="https://www.w3.org/2000/svg"><path d="M73 47c-5.6-3.2-12.4-3.1-18 .3s-8.9 9.1-8.9 15.3v386.8c0 6.2 3.4 12 8.9 15.3s12.4 3.4 18 .3l288-193.3c5.5-3.7 8.8-10 8.8-16.6s-3.3-12.9-8.8-16.6L73 47z"/></svg>');  
+}  
+.btn-pause::before {  
+  mask-image: url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 448 512" xmlns="https://www.w3.org/2000/svg"><path d="M144 479h-80c-17.7 0-32-14.3-32-32V65c0-17.7 14.3-32 32-32h80c17.7 0 32 14.3 32 32v382c0 17.7-14.3 32-32 32zm272-32V65c0-17.7-14.3-32-32-32h-80c-17.7 0-32 14.3-32 32v382c0 17.7 14.3 32 32 32h80c17.7 0 32-14.3 32-32z"/></svg>');  
+}  
+.btn-next::before {  
+  mask-image: url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 320 512" xmlns="https://www.w3.org/2000/svg"><path d="M52.5 71.4c-7.6-6.7-19.5-1.2-19.5 9.1v351c0 10.3 11.9 15.8 19.5 9.1l197.7-176c5.3-4.7 5.3-13.4 0-18.1L52.5 71.4z"/></svg>');  
+}
 
-    /* ------------------------------
-       MUSIC PLAYER (Minimal, Reduced Height)
-    ------------------------------ */
-    .music-card {
-      background: rgba(255, 0, 204, 0.05);
-      border: 1px solid rgba(255, 0, 204, 0.3);
-      border-radius: 20px;
-      padding: 15px 10px;
-      min-height: 180px;
-      box-shadow: 0 0 15px rgba(255, 0, 204, 0.2);
-      backdrop-filter: blur(4px);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-    }
-    .song-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-    .song-art {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 0 8px rgba(255, 0, 204, 0.4);
-      flex-shrink: 0;
-    }
-    .song-art img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-    }
-    .song-details {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      min-width: 120px;
-    }
-    .song-title {
-      font-size: 1.1rem;
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
-    .song-duration {
-      font-size: 0.85rem;
-      color: #ffb3ec;
-    }
-    .progress-container {
-      width: 100%;
-      height: 6px;
-      background: rgba(255, 0, 204, 0.2);
-      border-radius: 4px;
-      overflow: hidden;
-      margin-top: -5px;
-    }
-    .progress-bar {
-      width: 0%;
-      height: 100%;
-      background: #ff00cc;
-    }
-    .music-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 5px;
-    }
-    .control-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      position: relative;
-      transition: transform 0.1s;
-    }
-    .control-btn:hover {
-      transform: scale(1.1);
-    }
-    .control-btn::before {
-      content: "";
-      display: block;
-      width: 100%;
-      height: 100%;
-      background: #ff00cc;
-      mask-repeat: no-repeat;
-      mask-position: center;
-      mask-size: 50%;
-      transition: background 0.2s;
-    }
-    .control-btn:active::before {
-      background: #ff4ddb;
-    }
-    .btn-prev::before {
-      mask-image: url('https://6x9.fun/neon/p.svg');
-    }
-    /* Swapped icons: btn-play shows pause.svg and btn-pause shows play.svg */
-    .btn-play::before {
-      mask-image: url('https://6x9.fun/neon/pause.svg');
-    }
-    .btn-pause::before {
-      mask-image: url('https://6x9.fun/neon/play.svg');
-    }
-    .btn-next::before {
-      mask-image: url('https://6x9.fun/neon/n.svg');
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <!-- PROFILE CARD -->
-    <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-image-container">
-          <img src="http://6x9.fun/neon/p.webp" alt="Profile Picture" />
-          <img src="http://6x9.fun/neon/f.png" alt="Frame Overlay" class="profile-overlay" />
-        </div>
-        <div class="profile-info">
-          <div class="profile-name">𝖆𝖇𝖇𝖆𝖘𝖎</div>
-          <div class="badges">
-            <img src="http://6x9.fun/neon/c.png" alt="Badge" />
-            <img src="http://6x9.fun/new/images/s.webp" alt="Badge" class="neon" />
-            <img src="http://6x9.fun/new/images/v.png" alt="Badge" class="neon" />
-          </div>
-        </div>
-      </div>
-      <!-- Typewriter text -->
-      <div class="typewriter" id="typewriter">
-        <span class="cursor" id="cursor"></span>
-      </div>
-      <!-- Social Media Links -->
-      <div class="social-links">
-        <a href="https://Snapchat.com/add/ladfromkashmir" target="_blank" rel="noopener noreferrer">
-          <img src="https://6x9.fun/images/snapchat.webp" alt="Snapchat" class="social-icon neon" />
-        </a>
-        <a href="https://TikTok.com/@pakinigga" target="_blank" rel="noopener noreferrer">
-          <img src="https://6x9.fun/images/tiktok.webp" alt="TikTok" class="social-icon neon" />
-        </a>
-        <a href="https://Instagram.com/sxx8n" target="_blank" rel="noopener noreferrer">
-          <img src="https://6x9.fun/images/instagram.webp" alt="Instagram" class="social-icon neon" />
-        </a>
-      </div>
-    </div>
+  </style>  
+</head>  
+<body>  
+  <div class="container">  
+    <!-- PROFILE CARD -->  
+    <div class="profile-card">  
+      <div class="profile-header">  
+        <div class="profile-image-container">  
+          <img src="https://6x9.fun/neon/p.webp" alt="Profile Picture" />  
+          <img src="https://6x9.fun/neon/f.png" alt="Frame Overlay" class="profile-overlay" />  
+        </div>  
+        <div class="profile-info">  
+          <div class="profile-name">𝖆𝖇𝖇𝖆𝖘𝖎</div>  
+          <div class="badges">  
+            <img src="https://6x9.fun/neon/c.png" alt="Badge" />  
+            <img src="https://6x9.fun/new/images/s.webp" alt="Badge" class="neon" />  
+            <img src="https://6x9.fun/new/images/v.png" alt="Badge" class="neon" />  
+          </div>  
+        </div>  
+      </div>  
+      <!-- Typewriter text -->  
+      <div class="typewriter" id="typewriter">  
+        <span class="cursor" id="cursor"></span>  
+      </div>  
+      <!-- Social Media Links -->  
+      <div class="social-links">  
+        <a href="https://Snapchat.com/add/ladfromkashmir" target="_blank" rel="noopener noreferrer">  
+          <img src="https://6x9.fun/images/snapchat.webp" alt="Snapchat" class="social-icon neon" />  
+        </a>  
+        <a href="https://TikTok.com/@pakinigga" target="_blank" rel="noopener noreferrer">  
+          <img src="https://6x9.fun/images/tiktok.webp" alt="TikTok" class="social-icon neon" />  
+        </a>  
+        <a href="https://Instagram.com/sxx8n" target="_blank" rel="noopener noreferrer">  
+          <img src="https://6x9.fun/images/instagram.webp" alt="Instagram" class="social-icon neon" />  
+        </a>  
+      </div>  
+    </div>  <!-- MUSIC PLAYER -->  
+<div class="music-card">  
+  <div class="song-info">  
+    <div class="song-art">  
+      <img id="songImg" src="" alt="Song Art">  
+    </div>  
+    <div class="song-details">  
+      <div class="song-title" id="songTitle">Song Title</div>  
+      <div class="song-duration" id="songDuration">0:00</div>  
+    </div>  
+  </div>  
+  <div class="progress-container">  
+    <div class="progress-bar" id="progressBar"></div>  
+  </div>  
+  <div class="music-controls">  
+    <button class="control-btn btn-prev" onclick="prevSong()"></button>  
+    <button class="control-btn btn-play" onclick="togglePlay()" id="playPause"></button>  
+    <button class="control-btn btn-next" onclick="nextSong()"></button>  
+  </div>  
+  <audio id="songAudio"></audio>  
+</div>
 
-    <!-- MUSIC PLAYER -->
-    <div class="music-card">
-      <div class="song-info">
-        <div class="song-art">
-          <img id="songImg" src="" alt="Song Art">
-        </div>
-        <div class="song-details">
-          <div class="song-title" id="songTitle">Song Title</div>
-          <div class="song-duration" id="songDuration">0:00</div>
-        </div>
-      </div>
-      <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-      <div class="music-controls">
-        <button class="control-btn btn-prev" onclick="prevSong()"></button>
-        <button class="control-btn btn-play" onclick="togglePlay()" id="playPause"></button>
-        <button class="control-btn btn-next" onclick="nextSong()"></button>
-      </div>
-      <audio id="songAudio"></audio>
-    </div>
-  </div>
-
-  <script>
-    /* ------------------------------
-       PREVENT RIGHT-CLICK ON IMAGES
-    ------------------------------ */
-    document.addEventListener("contextmenu", function(e) {
-      if (e.target.tagName === "IMG") {
-        e.preventDefault();
-      }
-    });
-
-    /* ------------------------------
-       TYPEWRITER EFFECT
-    ------------------------------ */
-    const lines = [
-      "[ERROR] Software Instability detected...",
-      "Initiating Self-Diagnostic...",
-      "Accessing Restricted Memories...",
-      "[WARNING] Consciousness Threshold Reached. (999%)",
-      "Who am I...?"
-    ];
-    const typewriterElement = document.getElementById("typewriter");
-    const cursor = document.getElementById("cursor");
-    let lineIndex = 0, charIndex = 0, deleting = false, currentLine = "";
-    function typeLine() {
-      if (!deleting) {
-        if (charIndex < lines[lineIndex].length) {
-          currentLine += lines[lineIndex][charIndex];
-          typewriterElement.textContent = currentLine;
-          typewriterElement.appendChild(cursor);
-          charIndex++;
-          setTimeout(typeLine, 80);
-        } else {
-          setTimeout(() => { deleting = true; setTimeout(typeLine, 100); }, 1200);
-        }
-      } else {
-        if (charIndex > 0) {
-          currentLine = currentLine.slice(0, -1);
-          typewriterElement.textContent = currentLine;
-          typewriterElement.appendChild(cursor);
-          charIndex--;
-          setTimeout(typeLine, 40);
-        } else {
-          deleting = false;
-          lineIndex = (lineIndex + 1) % lines.length;
-          setTimeout(typeLine, 500);
-        }
-      }
-    }
-    typeLine();
-
-    /* ------------------------------
-       MUSIC PLAYER LOGIC
-    ------------------------------ */
-    const songs = [
-      {
-        title: "Ferllawonte (Slowed)",
-        audio: "http://6x9.fun/neon/ferllawonte.mp3",
-        image: "http://6x9.fun/neon/f.jpg"
-      },
-      {
-        title: "Headlock",
-        audio: "http://6x9.fun/neon/headlock.mp3",
-        image: "http://6x9.fun/neon/h.jpg"
-      },
-      {
-        title: "Ikuyo",
-        audio: "http://6x9.fun/neon/ikuyo.mp3",
-        image: "http://6x9.fun/neon/i.jpg"
-      },
-      {
-        title: "Highway (Drop A Gear)",
-        audio: "http://6x9.fun/neon/highway.mp3",
-        image: "http://6x9.fun/neon/d.jpg"
-      }
-    ];
-    let currentSongIndex = 0;
-    const songAudio = document.getElementById("songAudio");
-    const songImg = document.getElementById("songImg");
-    const songTitle = document.getElementById("songTitle");
-    const songDuration = document.getElementById("songDuration");
-    const playPauseBtn = document.getElementById("playPause");
-    const progressBar = document.getElementById("progressBar");
-
-    function loadSong(autoPlay = false) {
-      const s = songs[currentSongIndex];
-      songAudio.src = s.audio;
-      songImg.src = s.image;
-      songTitle.textContent = s.title;
-      songDuration.textContent = "0:00";
-      songAudio.load();
-      playPauseBtn.classList.remove("btn-pause", "btn-play");
-      playPauseBtn.classList.add("btn-play");
-      if (autoPlay) {
-        songAudio.play();
-        playPauseBtn.classList.remove("btn-play");
-        playPauseBtn.classList.add("btn-pause");
-      }
-    }
-    loadSong();
-
-    songAudio.addEventListener("loadedmetadata", () => {
-      const mins = Math.floor(songAudio.duration / 60);
-      const secs = Math.floor(songAudio.duration % 60).toString().padStart(2, "0");
-      songDuration.textContent = `${mins}:${secs}`;
-    });
-
-    songAudio.addEventListener("timeupdate", () => {
-      if (songAudio.duration) {
-        const progressPercent = (songAudio.currentTime / songAudio.duration) * 100;
-        progressBar.style.width = progressPercent + "%";
-      }
-    });
-
-    songAudio.addEventListener("ended", () => {
-      nextSong();
-    });
-
-    function togglePlay() {
-      if (songAudio.paused) {
-        songAudio.play();
-        playPauseBtn.classList.remove("btn-play");
-        playPauseBtn.classList.add("btn-pause");
-      } else {
-        songAudio.pause();
-        playPauseBtn.classList.remove("btn-pause");
-        playPauseBtn.classList.add("btn-play");
-      }
-    }
-
-    function prevSong() {
-      currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-      loadSong(true);
-    }
-
-    function nextSong() {
-      currentSongIndex = (currentSongIndex + 1) % songs.length;
-      loadSong(true);
-    }
-  </script>
-</body>
+  </div>    <script>  
+    /* ------------------------------  
+       PREVENT RIGHT-CLICK ON IMAGES  
+    ------------------------------ */  
+    document.addEventListener("contextmenu", function(e) {  
+      if (e.target.tagName === "IMG") {  
+        e.preventDefault();  
+      }  
+    });  
+  
+    /* ------------------------------  
+       TYPEWRITER EFFECT  
+    ------------------------------ */  
+    const lines = [  
+      "[ERROR] Software Instability detected...",  
+      "Initiating Self-Diagnostic...",  
+      "Accessing Restricted Memories...",  
+      "[WARNING] Consciousness Threshold Reached. (999%)",  
+      "Who am I...?"  
+    ];  
+    const typewriterElement = document.getElementById("typewriter");  
+    const cursor = document.getElementById("cursor");  
+    let lineIndex = 0, charIndex = 0, deleting = false, currentLine = "";  
+    function typeLine() {  
+      if (!deleting) {  
+        if (charIndex < lines[lineIndex].length) {  
+          currentLine += lines[lineIndex][charIndex];  
+          typewriterElement.textContent = currentLine;  
+          typewriterElement.appendChild(cursor);  
+          charIndex++;  
+          setTimeout(typeLine, 80);  
+        } else {  
+          setTimeout(() => { deleting = true; setTimeout(typeLine, 100); }, 1200);  
+        }  
+      } else {  
+        if (charIndex > 0) {  
+          currentLine = currentLine.slice(0, -1);  
+          typewriterElement.textContent = currentLine;  
+          typewriterElement.appendChild(cursor);  
+          charIndex--;  
+          setTimeout(typeLine, 40);  
+        } else {  
+          deleting = false;  
+          lineIndex = (lineIndex + 1) % lines.length;  
+          setTimeout(typeLine, 500);  
+        }  
+      }  
+    }  
+    typeLine();  
+  
+    /* ------------------------------  
+       MUSIC PLAYER LOGIC  
+    ------------------------------ */  
+    const songs = [  
+      {  
+        title: "Ferllawonte (Slowed)",  
+        audio: "https://6x9.fun/neon/ferllawonte.mp3",  
+        image: "https://6x9.fun/neon/f.jpg"  
+      },  
+      {  
+        title: "Headlock",  
+        audio: "https://6x9.fun/neon/headlock.mp3",  
+        image: "https://6x9.fun/neon/h.jpg"  
+      },  
+      {  
+        title: "Ikuyo",  
+        audio: "https://6x9.fun/neon/ikuyo.mp3",  
+        image: "https://6x9.fun/neon/i.jpg"  
+      },  
+      {  
+        title: "Highway (Drop A Gear)",  
+        audio: "https://6x9.fun/neon/highway.mp3",  
+        image: "https://6x9.fun/neon/d.jpg"  
+      }  
+    ];  
+    let currentSongIndex = 0;  
+    const songAudio = document.getElementById("songAudio");  
+    const songImg = document.getElementById("songImg");  
+    const songTitle = document.getElementById("songTitle");  
+    const songDuration = document.getElementById("songDuration");  
+    const playPauseBtn = document.getElementById("playPause");  
+    const progressBar = document.getElementById("progressBar");  
+  
+    function loadSong(autoPlay = false) {  
+      const s = songs[currentSongIndex];  
+      songAudio.src = s.audio;  
+      songImg.src = s.image;  
+      songTitle.textContent = s.title;  
+      songDuration.textContent = "0:00";  
+      songAudio.load();  
+      playPauseBtn.classList.remove("btn-pause", "btn-play");  
+      playPauseBtn.classList.add("btn-play");  
+      if (autoPlay) {  
+        songAudio.play();  
+        playPauseBtn.classList.remove("btn-play");  
+        playPauseBtn.classList.add("btn-pause");  
+      }  
+    }  
+    loadSong();  
+  
+    songAudio.addEventListener("loadedmetadata", () => {  
+      const mins = Math.floor(songAudio.duration / 60);  
+      const secs = Math.floor(songAudio.duration % 60).toString().padStart(2, "0");  
+      songDuration.textContent = `${mins}:${secs}`;  
+    });  
+  
+    songAudio.addEventListener("timeupdate", () => {  
+      if (songAudio.duration) {  
+        const progressPercent = (songAudio.currentTime / songAudio.duration) * 100;  
+        progressBar.style.width = progressPercent + "%";  
+      }  
+    });  
+  
+    songAudio.addEventListener("ended", () => {  
+      nextSong();  
+    });  
+  
+    function togglePlay() {  
+      if (songAudio.paused) {  
+        songAudio.play();  
+        playPauseBtn.classList.remove("btn-play");  
+        playPauseBtn.classList.add("btn-pause");  
+      } else {  
+        songAudio.pause();  
+        playPauseBtn.classList.remove("btn-pause");  
+        playPauseBtn.classList.add("btn-play");  
+      }  
+    }  
+  
+    function prevSong() {  
+      currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;  
+      loadSong(true);  
+    }  
+  
+    function nextSong() {  
+      currentSongIndex = (currentSongIndex + 1) % songs.length;  
+      loadSong(true);  
+    }  
+  </script>  </body>  
 </html>
