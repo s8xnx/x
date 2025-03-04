@@ -82,8 +82,8 @@
       gap: 10px;
     }
     .profile-image-container {
-      width: 100px;
-      height: 100px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       overflow: hidden;
       position: relative;
@@ -100,8 +100,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 120%;
+      height: 120%;
       pointer-events: none;
     }
     .profile-name {
@@ -131,6 +131,7 @@
       height: 25px;
       pointer-events: none;
     }
+    /* This filter creates the neon pink effect */
     .neon {
       filter: invert(26%) sepia(79%) saturate(7492%) hue-rotate(299deg) brightness(105%) contrast(103%);
     }
@@ -167,6 +168,7 @@
       opacity: 1;
       visibility: visible;
     }
+
     .typewriter {
       font-size: 1rem;
       white-space: pre-wrap;
@@ -320,8 +322,9 @@
       </div>
       <div class="profile-name">𝖆𝖇𝖇𝖆𝖘𝖎</div>
       <div class="badges">
+        <!-- Add "neon" class to c.png -->
         <div class="badge-container">
-          <img src="https://6x9.fun/neon/c.png" alt="Badge" />
+          <img src="https://6x9.fun/neon/c.png" alt="Badge" class="neon" />
           <div class="badge-tooltip">Certified</div>
         </div>
         <div class="badge-container">
@@ -331,6 +334,11 @@
         <div class="badge-container">
           <img src="https://6x9.fun/new/images/v.png" alt="Badge" class="neon" />
           <div class="badge-tooltip">Verified</div>
+        </div>
+        <!-- Add "neon" class to 666.webp -->
+        <div class="badge-container">
+          <img src="https://6x9.fun/neon/666.webp" alt="Badge" class="neon" />
+          <div class="badge-tooltip">6 6 6</div>
         </div>
       </div>
       <div class="typewriter" id="typewriter">
@@ -374,7 +382,7 @@
   </div>
 
   <script>
-    // Prevent right-click
+    // Prevent right-click on images
     document.addEventListener("contextmenu", function(e) {
       if (e.target.tagName === "IMG") e.preventDefault();
     });
@@ -510,8 +518,6 @@
     let holdTimer;
 
     badgeContainers.forEach(container => {
-      const img = container.querySelector('img');
-      
       // Mouse events
       container.addEventListener('mousedown', (e) => {
         startHold(e);
