@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>ABBASI</title>
   <style>
     /* ------------------------------
@@ -16,16 +16,46 @@
     html, body {
       width: 100%;
       height: 100%;
+      background: #000;
     }
     body {
-      background: url("https://6x9.fun/neon/b.gif") center center no-repeat fixed;
-      background-size: cover;
-      color: #ff00cc; /* Neon pink */
+      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)),
+                  url("https://6x9.fun/neon/b.gif") center center/cover no-repeat fixed;
+      color: #ff00cc;
       font-family: 'Courier New', Courier, monospace;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
     }
+
+    /* Mobile optimization */
+    @media (max-width: 768px) and (orientation: portrait) {
+      body {
+        background-attachment: scroll;
+        background-size: auto 100%;
+        background-position: center top;
+      }
+      .container {
+        margin: 15px auto;
+        gap: 15px;
+      }
+      .profile-card {
+        padding: 20px 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .social-icon {
+        width: 40px;
+        height: 40px;
+      }
+      .profile-name {
+        font-size: 1.4rem;
+      }
+    }
+
     .container {
       width: 95%;
       max-width: 600px;
@@ -36,24 +66,20 @@
     }
 
     /* ------------------------------
-       PROFILE CARD (Increased Height)
+       PROFILE CARD
     ------------------------------ */
     .profile-card {
-      background: rgba(255, 0, 204, 0.05); 
-      border: 1px solid rgba(255, 0, 204, 0.3);
+      background: rgba(255, 0, 204, 0.05);
+      border: 2px solid #ff00cc;
       border-radius: 20px;
       padding: 30px 20px;
       min-height: 280px;
       box-shadow: 0 0 15px rgba(255, 0, 204, 0.2);
       backdrop-filter: blur(4px);
-    }
-    .profile-header {
+      text-align: center;
       display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
-      justify-content: center;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
     }
     .profile-image-container {
       width: 100px;
@@ -62,7 +88,7 @@
       overflow: hidden;
       position: relative;
       box-shadow: 0 0 10px rgba(255, 0, 204, 0.4);
-      flex-shrink: 0;
+      margin: 0 auto;
     }
     .profile-image-container img {
       width: 100%;
@@ -78,20 +104,14 @@
       height: 100%;
       pointer-events: none;
     }
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      align-items: flex-start;
-      justify-content: center;
-    }
     .profile-name {
       font-size: 1.6rem;
       font-weight: bold;
       line-height: 1;
+      text-shadow: 0 0 8px rgba(255,0,204,0.3);
     }
     .badges {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
       background: rgba(255, 0, 204, 0.1);
@@ -99,18 +119,72 @@
       border-radius: 50px;
       padding: 4px 8px;
       backdrop-filter: blur(6px);
+      margin: 0 auto;
+      position: relative;
+    }
+    .badge-container {
+      position: relative;
+      cursor: pointer;
     }
     .badges img {
       width: 25px;
       height: 25px;
       pointer-events: none;
     }
-    /* Convert originally black images to neon pink */
     .neon {
       filter: invert(26%) sepia(79%) saturate(7492%) hue-rotate(299deg) brightness(105%) contrast(103%);
     }
-
-    /* Social Media Links in Profile */
+    .badge-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid #ff00cc;
+      color: #ff00cc;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      box-shadow: 0 0 8px rgba(255, 0, 204, 0.3);
+    }
+    .badge-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: #ff00cc transparent transparent transparent;
+    }
+    .badge-container:active .badge-tooltip,
+    .badge-container.active .badge-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+    .typewriter {
+      font-size: 1rem;
+      white-space: pre-wrap;
+      min-height: 80px;
+      text-align: center;
+    }
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: #ff00cc;
+      animation: blink 0.7s steps(1) infinite;
+      vertical-align: bottom;
+      margin-left: 2px;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
     .social-links {
       display: flex;
       justify-content: center;
@@ -126,53 +200,25 @@
       pointer-events: auto;
     }
 
-    /* TYPEWRITER TEXT */
-    .typewriter {
-      font-size: 1rem;
-      margin: 10px auto 0 auto;
-      white-space: pre-wrap;
-      min-height: 80px;
-      text-align: center;
-      position: relative;
-    }
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      background: #ff00cc;
-      animation: blink 0.7s steps(1) infinite;
-      vertical-align: bottom;
-      margin-left: 2px;
-    }
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
     /* ------------------------------
-       MUSIC PLAYER (Minimal, Reduced Height)
+       MUSIC CARD
     ------------------------------ */
     .music-card {
-      background: rgba(255, 0, 204, 0.05);
-      border: 1px solid rgba(255, 0, 204, 0.3);
-      border-radius: 20px;
-      padding: 15px 10px;
-      min-height: 180px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px solid #ff00cc;
+      border-radius: 30px;
+      padding: 15px 20px;
       box-shadow: 0 0 15px rgba(255, 0, 204, 0.2);
       backdrop-filter: blur(4px);
       display: flex;
-      flex-direction: column;
-      gap: 10px;
       align-items: center;
-    }
-    .song-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       gap: 15px;
-      flex-wrap: wrap;
+      min-height: 80px;
+      position: relative;
     }
     .song-art {
-      width: 70px;
-      height: 70px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       overflow: hidden;
       box-shadow: 0 0 8px rgba(255, 0, 204, 0.4);
@@ -187,25 +233,31 @@
     .song-details {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      min-width: 120px;
+      flex: 1;
+      gap: 5px;
     }
     .song-title {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: bold;
-      margin-bottom: 4px;
+      text-shadow: 0 0 3px rgba(255,0,204,0.4);
     }
-    .song-duration {
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #songCurrentTime,
+    #songDuration {
       font-size: 0.85rem;
       color: #ffb3ec;
     }
     .progress-container {
+      position: relative;
       width: 100%;
-      height: 6px;
-      background: rgba(255, 0, 204, 0.2);
-      border-radius: 4px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
       overflow: hidden;
-      margin-top: -5px;
     }
     .progress-bar {
       width: 0%;
@@ -215,16 +267,15 @@
     .music-controls {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 5px;
+      gap: 5px;
+      margin-left: auto;
     }
     .control-btn {
       background: none;
       border: none;
       cursor: pointer;
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       position: relative;
       transition: transform 0.1s;
     }
@@ -239,7 +290,7 @@
       background: #ff00cc;
       mask-repeat: no-repeat;
       mask-position: center;
-      mask-size: 50%;
+      mask-size: 40%;
       transition: background 0.2s;
     }
     .control-btn:active::before {
@@ -248,7 +299,6 @@
     .btn-prev::before {
       mask-image: url('https://6x9.fun/neon/p.svg');
     }
-    /* Swapped icons: btn-play shows pause.svg and btn-pause shows play.svg */
     .btn-play::before {
       mask-image: url('https://6x9.fun/neon/pause.svg');
     }
@@ -264,25 +314,28 @@
   <div class="container">
     <!-- PROFILE CARD -->
     <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-image-container">
-          <img src="https://6x9.fun/neon/p.webp" alt="Profile Picture" />
-          <img src="https://6x9.fun/neon/f.png" alt="Frame Overlay" class="profile-overlay" />
+      <div class="profile-image-container">
+        <img src="https://6x9.fun/neon/p.webp" alt="Profile Picture" />
+        <img src="https://6x9.fun/neon/f.png" alt="Frame Overlay" class="profile-overlay" />
+      </div>
+      <div class="profile-name">𝖆𝖇𝖇𝖆𝖘𝖎</div>
+      <div class="badges">
+        <div class="badge-container">
+          <img src="https://6x9.fun/neon/c.png" alt="Badge" />
+          <div class="badge-tooltip">Certified</div>
         </div>
-        <div class="profile-info">
-          <div class="profile-name">𝖆𝖇𝖇𝖆𝖘𝖎</div>
-          <div class="badges">
-            <img src="https://6x9.fun/neon/c.png" alt="Badge" />
-            <img src="https://6x9.fun/new/images/s.webp" alt="Badge" class="neon" />
-            <img src="https://6x9.fun/new/images/v.png" alt="Badge" class="neon" />
-          </div>
+        <div class="badge-container">
+          <img src="https://6x9.fun/new/images/s.webp" alt="Badge" class="neon" />
+          <div class="badge-tooltip">Supporter</div>
+        </div>
+        <div class="badge-container">
+          <img src="https://6x9.fun/new/images/v.png" alt="Badge" class="neon" />
+          <div class="badge-tooltip">Verified</div>
         </div>
       </div>
-      <!-- Typewriter text -->
       <div class="typewriter" id="typewriter">
         <span class="cursor" id="cursor"></span>
       </div>
-      <!-- Social Media Links -->
       <div class="social-links">
         <a href="https://Snapchat.com/add/ladfromkashmir" target="_blank" rel="noopener noreferrer">
           <img src="https://6x9.fun/images/snapchat.webp" alt="Snapchat" class="social-icon neon" />
@@ -296,19 +349,20 @@
       </div>
     </div>
 
-    <!-- MUSIC PLAYER -->
+    <!-- MUSIC CARD -->
     <div class="music-card">
-      <div class="song-info">
-        <div class="song-art">
-          <img id="songImg" src="" alt="Song Art">
-        </div>
-        <div class="song-details">
-          <div class="song-title" id="songTitle">Song Title</div>
-          <div class="song-duration" id="songDuration">0:00</div>
-        </div>
+      <div class="song-art">
+        <img id="songImg" src="" alt="Song Art">
       </div>
-      <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
+      <div class="song-details">
+        <div class="song-title" id="songTitle">Song Title</div>
+        <div class="progress-row">
+          <span id="songCurrentTime">0:00</span>
+          <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <span id="songDuration">0:00</span>
+        </div>
       </div>
       <div class="music-controls">
         <button class="control-btn btn-prev" onclick="prevSong()"></button>
@@ -320,18 +374,12 @@
   </div>
 
   <script>
-    /* ------------------------------
-       PREVENT RIGHT-CLICK ON IMAGES
-    ------------------------------ */
+    // Prevent right-click
     document.addEventListener("contextmenu", function(e) {
-      if (e.target.tagName === "IMG") {
-        e.preventDefault();
-      }
+      if (e.target.tagName === "IMG") e.preventDefault();
     });
 
-    /* ------------------------------
-       TYPEWRITER EFFECT
-    ------------------------------ */
+    // Typewriter Effect
     const lines = [
       "[ERROR] Software Instability detected...",
       "Initiating Self-Diagnostic...",
@@ -342,6 +390,7 @@
     const typewriterElement = document.getElementById("typewriter");
     const cursor = document.getElementById("cursor");
     let lineIndex = 0, charIndex = 0, deleting = false, currentLine = "";
+
     function typeLine() {
       if (!deleting) {
         if (charIndex < lines[lineIndex].length) {
@@ -369,9 +418,7 @@
     }
     typeLine();
 
-    /* ------------------------------
-       MUSIC PLAYER LOGIC
-    ------------------------------ */
+    // Music Player
     const songs = [
       {
         title: "Ferllawonte (Slowed)",
@@ -394,10 +441,12 @@
         image: "https://6x9.fun/neon/d.jpg"
       }
     ];
+
     let currentSongIndex = 0;
     const songAudio = document.getElementById("songAudio");
     const songImg = document.getElementById("songImg");
     const songTitle = document.getElementById("songTitle");
+    const songCurrentTime = document.getElementById("songCurrentTime");
     const songDuration = document.getElementById("songDuration");
     const playPauseBtn = document.getElementById("playPause");
     const progressBar = document.getElementById("progressBar");
@@ -408,9 +457,12 @@
       songImg.src = s.image;
       songTitle.textContent = s.title;
       songDuration.textContent = "0:00";
+      songCurrentTime.textContent = "0:00";
       songAudio.load();
+
       playPauseBtn.classList.remove("btn-pause", "btn-play");
       playPauseBtn.classList.add("btn-play");
+
       if (autoPlay) {
         songAudio.play();
         playPauseBtn.classList.remove("btn-play");
@@ -429,34 +481,65 @@
       if (songAudio.duration) {
         const progressPercent = (songAudio.currentTime / songAudio.duration) * 100;
         progressBar.style.width = progressPercent + "%";
+
+        const currentMins = Math.floor(songAudio.currentTime / 60);
+        const currentSecs = Math.floor(songAudio.currentTime % 60).toString().padStart(2, "0");
+        songCurrentTime.textContent = `${currentMins}:${currentSecs}`;
       }
     });
 
-    songAudio.addEventListener("ended", () => {
-      nextSong();
-    });
+    songAudio.addEventListener("ended", () => nextSong());
 
     function togglePlay() {
-      if (songAudio.paused) {
-        songAudio.play();
-        playPauseBtn.classList.remove("btn-play");
-        playPauseBtn.classList.add("btn-pause");
-      } else {
-        songAudio.pause();
-        playPauseBtn.classList.remove("btn-pause");
-        playPauseBtn.classList.add("btn-play");
-      }
+      songAudio.paused ? songAudio.play() : songAudio.pause();
+      playPauseBtn.classList.toggle("btn-pause");
+      playPauseBtn.classList.toggle("btn-play");
     }
 
     function prevSong() {
       currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
       loadSong(true);
     }
-
     function nextSong() {
       currentSongIndex = (currentSongIndex + 1) % songs.length;
       loadSong(true);
     }
+
+    // Badge Hold Detection
+    const badgeContainers = document.querySelectorAll('.badge-container');
+    let holdTimer;
+
+    badgeContainers.forEach(container => {
+      const img = container.querySelector('img');
+      
+      // Mouse events
+      container.addEventListener('mousedown', (e) => {
+        startHold(e);
+        e.preventDefault();
+      });
+      container.addEventListener('mouseup', endHold);
+      container.addEventListener('mouseleave', endHold);
+
+      // Touch events
+      container.addEventListener('touchstart', (e) => {
+        startHold(e);
+        e.preventDefault();
+      });
+      container.addEventListener('touchend', endHold);
+      container.addEventListener('touchcancel', endHold);
+
+      function startHold(e) {
+        clearTimeout(holdTimer);
+        holdTimer = setTimeout(() => {
+          container.classList.add('active');
+        }, 500);
+      }
+
+      function endHold() {
+        clearTimeout(holdTimer);
+        container.classList.remove('active');
+      }
+    });
   </script>
 </body>
 </html>
