@@ -81,14 +81,21 @@
       flex-direction: column;
       gap: 10px;
     }
-    .profile-image-container {
+
+    /* New wrapper to hold both the circular image and the frame overlay */
+    .profile-frame-container {
+      position: relative;
       width: 140px;
       height: 140px;
+      margin: 0 auto;
+    }
+
+    .profile-image-container {
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       overflow: hidden;
-      position: relative;
       box-shadow: 0 0 10px rgba(255, 0, 204, 0.4);
-      margin: 0 auto;
     }
     .profile-image-container img {
       width: 100%;
@@ -96,14 +103,17 @@
       object-fit: cover;
       pointer-events: none;
     }
-    .profile-overlay {
+
+    /* New class for the frame overlay */
+    .profile-frame {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 120%;
-      height: 120%;
+      top: -10px;    /* Adjust as needed */
+      left: -10px;   /* Adjust as needed */
+      width: 160px;  /* Adjust size so it sits outside the circle */
+      height: 160px;
       pointer-events: none;
     }
+
     .profile-name {
       font-size: 1.6rem;
       font-weight: bold;
@@ -316,13 +326,14 @@
   <div class="container">
     <!-- PROFILE CARD -->
     <div class="profile-card">
-      <div class="profile-image-container">
-        <img src="https://6x9.fun/neon/p.webp" alt="Profile Picture" />
-        <img src="https://6x9.fun/neon/f.png" alt="Frame Overlay" class="profile-overlay" />
+      <div class="profile-frame-container">
+        <div class="profile-image-container">
+          <img src="https://6x9.fun/neon/p.webp" alt="Profile Picture" />
+        </div>
+        <img src="https://6x9.fun/neon/f.png" alt="Frame Overlay" class="profile-frame" />
       </div>
       <div class="profile-name">𝖆𝖇𝖇𝖆𝖘𝖎</div>
       <div class="badges">
-        <!-- Add "neon" class to c.png -->
         <div class="badge-container">
           <img src="https://6x9.fun/neon/c.png" alt="Badge" class="neon" />
           <div class="badge-tooltip">Certified</div>
@@ -335,7 +346,6 @@
           <img src="https://6x9.fun/new/images/v.png" alt="Badge" class="neon" />
           <div class="badge-tooltip">Verified</div>
         </div>
-        <!-- Add "neon" class to 666.webp -->
         <div class="badge-container">
           <img src="https://6x9.fun/neon/666.webp" alt="Badge" class="neon" />
           <div class="badge-tooltip">6 6 6</div>
