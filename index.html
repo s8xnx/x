@@ -4,22 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ABBASI</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    /* CSS Variables for consistency */
+    :root {
+      --primary-color: #7266ff;
+      --overlay-bg: rgba(0, 0, 0, 0.8);
+      --card-border: #000;
+      --card-shadow-color: rgba(114, 102, 255, 0.8);
+    }
+    
     /* General Page Styling */
     body {
-      font-family: 'Georgia', serif;
+      font-family: 'Poppins', sans-serif;
       text-align: center;
-      background: #000; /* pure black background */
-      color: white;
+      background: var(--primary-color);
+      color: #fff;
       margin: 0;
       padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      overflow: hidden;
     }
-
+    
+    /* Background Image Overlay (Original Style) */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://6x9.fun/images/background.webp') center/cover no-repeat;
+      opacity: 0.25;
+      z-index: -1;
+    }
+    
     /* Overlay Styles */
     #overlay {
       position: fixed;
@@ -27,7 +51,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      background: var(--overlay-bg);
       backdrop-filter: blur(10px);
       display: flex;
       justify-content: center;
@@ -36,27 +60,24 @@
       cursor: pointer;
       transition: opacity 0.5s ease;
     }
-
     #overlay-text {
-      font-size: 24px;
-      font-weight: bold;
-      color: white;
-      font-family: 'Georgia', serif;
-      text-align: center;
-      animation: fade-in 1s ease-in-out;
+      font-size: 28px;
+      font-weight: 600;
+      color: #fff;
+      animation: pulse 1.5s infinite;
     }
-
-    @keyframes fade-in {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
     }
-
+    
     /* Card Design */
     .card {
       width: 90%;
       max-width: 350px;
-      height: 600px;
-      background: #7266ff;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(0px);
       padding: 20px;
       border-radius: 25px;
       display: flex;
@@ -64,65 +85,22 @@
       align-items: center;
       justify-content: space-between;
       position: relative;
-      border: 4px solid black;
-      overflow: hidden;
-      box-shadow:
-        0 0 10px rgba(114, 102, 255, 0.8),
-        0 0 20px rgba(114, 102, 255, 0.6),
-        0 0 30px rgba(114, 102, 255, 0.4);
-      animation: neon-glow 2s infinite ease-in-out;
-      opacity: 0;
-      transform: translateY(100vh);
-      transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 1.2s ease;
-      will-change: transform, opacity;
+      border: 2px solid var(--card-border);
+      box-shadow: 0 4px 15px var(--card-shadow-color);
+      animation: cardFadeIn 0.8s ease-out;
+      z-index: 2;
     }
-
-    .card.card-visible {
-      opacity: 1;
-      transform: translateY(0);
+    @keyframes cardFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
-
-    @keyframes neon-glow {
-      0% {
-        box-shadow:
-          0 0 10px rgba(114, 102, 255, 0.8),
-          0 0 20px rgba(114, 102, 255, 0.6),
-          0 0 30px rgba(114, 102, 255, 0.4);
-      }
-      50% {
-        box-shadow:
-          0 0 15px rgba(114, 102, 255, 1),
-          0 0 30px rgba(114, 102, 255, 0.8),
-          0 0 45px rgba(114, 102, 255, 0.6);
-      }
-      100% {
-        box-shadow:
-          0 0 10px rgba(114, 102, 255, 0.8),
-          0 0 20px rgba(114, 102, 255, 0.6),
-          0 0 30px rgba(114, 102, 255, 0.4);
-      }
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('https://6x9.fun/images/background.webp') center/cover no-repeat;
-      opacity: 0.25;
-      z-index: 0;
-    }
-
+    
     /* Corner Text */
     .corner {
       position: absolute;
       font-size: 24px;
-      font-weight: bold;
-      font-family: 'Times New Roman', serif;
-      z-index: 1;
-      color: white;
+      font-weight: 600;
+      color: #fff;
     }
     .top-left {
       top: 10px;
@@ -133,20 +111,18 @@
       right: 15px;
       transform: rotate(180deg);
     }
-
+    
     /* Profile Container */
     .profile-container {
       position: relative;
-      width: 110px;
-      height: 110px;
-      z-index: 1;
+      width: 120px;
+      height: 120px;
     }
     .profile-pic {
       width: 100%;
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      display: block;
     }
     .profile-container::after {
       content: "";
@@ -155,22 +131,21 @@
       left: -7.5px;
       width: calc(100% + 15px);
       height: calc(100% + 15px);
-      background: url('https://6x9.fun/angry.png') center/100% 100% no-repeat;
+      background: url('https://6x9.fun/angry.png') center/contain no-repeat;
       pointer-events: none;
     }
-
+    
     /* Badges Section */
     .badge-container {
       display: flex;
       justify-content: center;
-      gap: 1px;
+      align-items: center;
+      gap: 5px;
       margin: 10px 0;
       padding: 8px 12px;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
       border-radius: 50px;
-      z-index: 1;
     }
     .badge-img {
       height: 28px;
@@ -179,80 +154,71 @@
       user-select: none;
       -webkit-user-drag: none;
     }
-
+    
     /* Name */
     h1 {
-      font-size: 24px;
-      margin: 5px 0;
-      font-weight: bold;
-      z-index: 1;
-      color: white;
+      font-size: 26px;
+      margin: 10px 0;
+      font-weight: 600;
+      color: #fff;
     }
-
-    /* Quote */
+    
+    /* Typewriter Text (Short Description) */
     .quote {
       font-style: italic;
-      font-size: 14px;
+      font-size: 16px;
       margin-bottom: 15px;
-      color: white;
-      z-index: 1;
+      color: #fff;
+      min-height: 24px;
     }
-
+    /* Blinking cursor for typewriter effect */
+    #typewriter-text::after {
+      content: "|";
+      animation: blink 0.8s step-start infinite;
+      margin-left: 5px;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    
     /* Social Icons */
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 2px;
-      margin-bottom: 2px;
-      z-index: 1;
-    }
-    .social-icons img {
-      width: 40px;
-      height: 40px;
-      filter: invert(1);
-      transition: transform 0.2s;
-    }
-    .social-icons img:hover {
-      transform: scale(1.1);
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
     }
     .social-icons a {
       display: inline-block;
-      position: relative;
-      cursor: pointer;
+      transition: transform 0.2s;
     }
-    .social-icons a::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100%;
-      height: 100%;
-      background: white;
-      transform: translate(-50%, -50%);
-      filter: blur(8px);
-      opacity: 0.25;
-      pointer-events: none;
-      border-radius: 50%;
-      z-index: -1;
+    .social-icons a:hover {
+      transform: translateY(-5px) scale(1.1);
     }
+    /* Make images un-downloadable by disabling pointer events on them */
     .social-icons a img {
+      width: 40px;
+      height: 40px;
+      filter: invert(1);
       pointer-events: none;
+      -webkit-user-drag: none;
+      user-select: none;
     }
-
+    
     /* Mobile Responsive */
     @media screen and (max-width: 600px) {
       .card {
-        width: 95%;
         max-width: 320px;
-        height: 550px;
+        padding: 15px;
       }
       .profile-container {
         width: 100px;
         height: 100px;
       }
-      .social-icons img {
-        width: 55px;
-        height: 55px;
+      .social-icons a img {
+        width: 35px;
+        height: 35px;
       }
     }
   </style>
@@ -260,72 +226,86 @@
 <body>
   <!-- Overlay -->
   <div id="overlay">
-    <div id="overlay-text">[Click Anywhere]</div>
+    <div id="overlay-text">Click Anywhere to Enter</div>
   </div>
-
+  
   <!-- Card -->
   <div class="card">
     <div class="corner top-left">A♠</div>
-    
     <!-- Profile Picture with Frame Overlay -->
     <div class="profile-container">
       <img src="https://6x9.fun/images/profile.webp" alt="Profile Picture" class="profile-pic">
     </div>
-
     <!-- Name -->
     <h1>ABBASI</h1>
-
     <!-- Badges -->
     <div class="badge-container">
-      <img src="https://6x9.fun/images/l.webp" class="badge-img" draggable="false">
-      <img src="https://6x9.fun/images/b.webp" class="badge-img middle-badge" draggable="false">
-      <img src="https://6x9.fun/images/r.webp" class="badge-img" draggable="false">
+      <img src="https://6x9.fun/images/l.webp" class="badge-img" alt="Badge L">
+      <img src="https://6x9.fun/images/b.webp" class="badge-img" alt="Badge B">
+      <img src="https://6x9.fun/images/r.webp" class="badge-img" alt="Badge R">
     </div>
-
-    <!-- Short Description -->
-    <p class="quote">I'm <strong>6.1 Feet</strong> BTW</p>
-
+    <!-- Typewriter Effect for Short Description -->
+    <p class="quote" id="typewriter-text"></p>
     <!-- Social Media Icons -->
     <div class="social-icons">
       <a href="https://snapchat.com/add/ladfromkashmir" target="_blank" rel="noopener noreferrer">
-        <img src="https://6x9.fun/images/snapchat.webp" alt="Snapchat" draggable="false">
-      </a>
-      <a href="https://instagram.com/sxx8n" target="_blank" rel="noopener noreferrer">
-        <img src="https://6x9.fun/images/instagram.webp" alt="Instagram" draggable="false">
+        <img src="https://6x9.fun/images/snapchat.webp" alt="Snapchat">
       </a>
       <a href="https://tiktok.com/@pakinigga" target="_blank" rel="noopener noreferrer">
-        <img src="https://6x9.fun/images/tiktok.webp" alt="TikTok" draggable="false">
+        <img src="https://6x9.fun/images/tiktok.webp" alt="TikTok">
+      </a>
+      <a href="https://instagram.com/sxx8n" target="_blank" rel="noopener noreferrer">
+        <img src="https://6x9.fun/images/instagram.webp" alt="Instagram">
       </a>
       <a href="https://www.pinterest.com/609x/" target="_blank" rel="noopener noreferrer">
-        <img src="https://6x9.fun/images/pinterest.webp" alt="Pinterest" draggable="false">
+        <img src="https://6x9.fun/images/pinterest.webp" alt="Pinterest">
       </a>
     </div>
-
     <!-- Quote -->
     <p class="quote">"SOULMATES BECOME SOULLESS"</p>
-
     <div class="corner bottom-right">A♠</div>
   </div>
-
+  
   <script>
-    // Wait until everything (including images) has loaded
+    // Overlay dismissal and typewriter effect initiation
     window.addEventListener('load', () => {
       const overlay = document.getElementById('overlay');
-      const body = document.body;
-      const card = document.querySelector('.card');
-
-      // Optional: add an active class to body for any additional effects
-      body.classList.add('overlay-active');
-
-      // On overlay click, fade it out and trigger the card animation
       overlay.addEventListener('click', () => {
         overlay.style.opacity = '0';
-        card.classList.add('card-visible');
         setTimeout(() => {
           overlay.remove();
+          startTypewriter();
         }, 500);
       });
     });
+    
+    function startTypewriter() {
+      const textElement = document.getElementById("typewriter-text");
+      const fullText = "I'm 6.1 feet btw";
+      let currentIndex = 0;
+      let isDeleting = false;
+      
+      function typeWriter() {
+        if (!isDeleting) {
+          textElement.textContent = fullText.substring(0, currentIndex + 1);
+          currentIndex++;
+          if (currentIndex === fullText.length) {
+            setTimeout(() => { isDeleting = true; typeWriter(); }, 1000);
+            return;
+          }
+        } else {
+          textElement.textContent = fullText.substring(0, currentIndex - 1);
+          currentIndex--;
+          if (currentIndex === 0) {
+            isDeleting = false;
+          }
+        }
+        const delay = isDeleting ? 80 : 120;
+        setTimeout(typeWriter, delay);
+      }
+      
+      typeWriter();
+    }
   </script>
 </body>
 </html>
