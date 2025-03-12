@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ABBASI</title>
-  <!-- Google Font -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* CSS Variables for consistency */
     :root {
@@ -31,7 +32,7 @@
       align-items: center;
     }
     
-    /* Background Image Overlay (Original Style) */
+    /* Background Image Overlay */
     body::before {
       content: "";
       position: fixed;
@@ -102,15 +103,8 @@
       font-weight: 600;
       color: #fff;
     }
-    .top-left {
-      top: 10px;
-      left: 15px;
-    }
-    .bottom-right {
-      bottom: 10px;
-      right: 15px;
-      transform: rotate(180deg);
-    }
+    .top-left { top: 10px; left: 15px; }
+    .bottom-right { bottom: 10px; right: 15px; transform: rotate(180deg); }
     
     /* Profile Container */
     .profile-container {
@@ -157,21 +151,22 @@
     
     /* Name */
     h1 {
+      font-family: 'Orbitron', sans-serif;
       font-size: 26px;
       margin: 10px 0;
-      font-weight: 600;
+      font-weight: 700;
       color: #fff;
     }
     
     /* Typewriter Text (Short Description) */
     .quote {
-      font-style: italic;
+      font-family: 'Orbitron', sans-serif;
       font-size: 16px;
       margin-bottom: 15px;
       color: #fff;
       min-height: 24px;
     }
-    /* Blinking cursor for typewriter effect */
+    /* Blinking Cursor */
     #typewriter-text::after {
       content: "|";
       animation: blink 0.8s step-start infinite;
@@ -179,6 +174,14 @@
     }
     @keyframes blink {
       50% { opacity: 0; }
+    }
+    
+    /* Bottom Quote: Reverting to the original simple italic style */
+    .bottom-quote {
+      font-style: italic;
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: #fff;
     }
     
     /* Social Icons */
@@ -196,7 +199,6 @@
     .social-icons a:hover {
       transform: translateY(-5px) scale(1.1);
     }
-    /* Make images un-downloadable by disabling pointer events on them */
     .social-icons a img {
       width: 40px;
       height: 40px;
@@ -261,8 +263,8 @@
         <img src="https://6x9.fun/images/pinterest.webp" alt="Pinterest">
       </a>
     </div>
-    <!-- Quote -->
-    <p class="quote">"SOULMATES BECOME SOULLESS"</p>
+    <!-- Bottom Quote in Original Simple Italic Style -->
+    <p class="bottom-quote">"SOULMATES BECOME SOULLESS"</p>
     <div class="corner bottom-right">A♠</div>
   </div>
   
