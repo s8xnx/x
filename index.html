@@ -58,7 +58,6 @@
       justify-content: center;
       align-items: center;
       z-index: 1000;
-      cursor: pointer;
       transition: opacity 0.5s ease;
     }
     #overlay-text {
@@ -269,16 +268,14 @@
   </div>
   
   <script>
-    // Overlay dismissal and typewriter effect initiation
     window.addEventListener('load', () => {
       const overlay = document.getElementById('overlay');
-      overlay.addEventListener('click', () => {
-        overlay.style.opacity = '0';
-        setTimeout(() => {
-          overlay.remove();
-          startTypewriter();
-        }, 500);
-      });
+      // Automatically fade out the overlay when the page loads
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.remove();
+        startTypewriter();
+      }, 500); // Wait for the fade-out transition to complete
     });
     
     function startTypewriter() {
