@@ -4,6 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ABBASI</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Discover ABBASI – a 6 feet tall personality from Kashmir. Explore his unique profile as ladfromkashmir, Kashmir abbasi, abbasi Kashmir, kashmiri abbasi, Abubakar Abbasi, Abubakar Abbasi Kashmir, and more." />
+  <meta name="keywords" content="6 feet abbasi, Abbasi 6 feet, ladfromkashmir, Kashmir abbasi, abbasi Kashmir, kashmiri abbasi, ABBASI Official, ABBASI Profile, 6.1 Feet Tall Influencer, Modern Digital Persona, Creative Personal Branding, Unique Profile Design, Bold Online Identity, Social Media Lifestyle, Tall Kashmiri Influencer, Kashmir Social Icon, 6ft Digital Trendsetter, Kashmir Lifestyle Blogger, Modern Kashmiri Persona, Kashmiri Style & Vibes, Influential Abbasi Profile, abbasi 6 feet, 6 feet abbasi, 6 feet kashmiri, Abubakar Abbasi, Abubakar Abbasi Kashmir, Kashmir Snapchat, Kashmir Instagram, Kashmir TikTok, Abbasi Snapchat, Abbasi Instagram, Abbasi TikTok, Sxx8n, x609, pakinigga, TikTok pakinigga, 6x9, 6x9.fun, 6x9 abbasi" />
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Person",
+    "name": "ABBASI",
+    "description": "ABBASI is a 6 feet tall personality from Kashmir, known as ladfromkashmir. Keywords include: 6 feet abbasi, Abbasi 6 feet, Kashmir abbasi, abbasi Kashmir, kashmiri abbasi, Abubakar Abbasi, Abubakar Abbasi Kashmir, Kashmir Snapchat, Kashmir Instagram, Kashmir TikTok, Abbasi Snapchat, Abbasi Instagram, Abbasi TikTok, Sxx8n, x609, pakinigga, TikTok pakinigga, 6x9, 6x9.fun, 6x9 abbasi.",
+    "image": "https://6x9.fun/images/profile.webp"
+  }
+  </script>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
@@ -45,7 +57,7 @@
       z-index: -1;
     }
     
-    /* Overlay Styles */
+    /* Overlay Styles (Initial Page Overlay) */
     #overlay {
       position: fixed;
       top: 0;
@@ -101,6 +113,7 @@
       font-size: 24px;
       font-weight: 600;
       color: #fff;
+      z-index: 3;
     }
     .top-left { top: 10px; left: 15px; }
     .bottom-right { bottom: 10px; right: 15px; transform: rotate(180deg); }
@@ -110,6 +123,8 @@
       position: relative;
       width: 120px;
       height: 120px;
+      cursor: default;
+      z-index: 4;
     }
     .profile-pic {
       width: 100%;
@@ -139,6 +154,7 @@
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(5px);
       border-radius: 50px;
+      z-index: 4;
     }
     .badge-img {
       height: 28px;
@@ -155,6 +171,7 @@
       margin: 10px 0;
       font-weight: 700;
       color: #fff;
+      z-index: 4;
     }
     
     /* Typewriter Text (Short Description) */
@@ -164,6 +181,7 @@
       margin-bottom: 15px;
       color: #fff;
       min-height: 24px;
+      z-index: 4;
     }
     /* Blinking Cursor */
     #typewriter-text::after {
@@ -175,12 +193,13 @@
       50% { opacity: 0; }
     }
     
-    /* Bottom Quote: Reverting to the original simple italic style */
+    /* Bottom Quote: Original Simple Italic Style */
     .bottom-quote {
       font-style: italic;
       font-size: 16px;
       margin-bottom: 15px;
       color: #fff;
+      z-index: 4;
     }
     
     /* Social Icons */
@@ -190,6 +209,7 @@
       align-items: center;
       gap: 15px;
       margin-bottom: 10px;
+      z-index: 4;
     }
     .social-icons a {
       display: inline-block;
@@ -225,7 +245,7 @@
   </style>
 </head>
 <body>
-  <!-- Overlay -->
+  <!-- Overlay (Initial Page Overlay) -->
   <div id="overlay">
     <div id="overlay-text">Click Anywhere to Enter</div>
   </div>
@@ -262,20 +282,20 @@
         <img src="https://6x9.fun/images/pinterest.webp" alt="Pinterest">
       </a>
     </div>
-    <!-- Bottom Quote in Original Simple Italic Style -->
+    <!-- Bottom Quote -->
     <p class="bottom-quote">"SOULMATES BECOME SOULLESS"</p>
     <div class="corner bottom-right">A♠</div>
   </div>
   
   <script>
+    // Remove initial overlay on page load
     window.addEventListener('load', () => {
       const overlay = document.getElementById('overlay');
-      // Automatically fade out the overlay when the page loads
       overlay.style.opacity = '0';
       setTimeout(() => {
         overlay.remove();
         startTypewriter();
-      }, 500); // Wait for the fade-out transition to complete
+      }, 500);
     });
     
     function startTypewriter() {
